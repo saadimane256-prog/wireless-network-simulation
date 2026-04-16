@@ -1,1 +1,17 @@
+version: '3.8'
 
+services:
+  wireless-sim:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: wireless-network-simulation:latest
+    container_name: wireless-sim-container
+    volumes:
+      - ./results:/opt/omnetpp-workspace/wireless-network-simulation/results
+      - ./analysis/output:/opt/omnetpp-workspace/wireless-network-simulation/analysis/output
+    environment:
+      - OMNETPP_HOME=/opt/omnetpp-workspace/omnetpp-5.7
+      - INET_PROJECT=/opt/omnetpp-workspace/inet
+    working_dir: /opt/omnetpp-workspace/wireless-network-simulation
+    entrypoint: /bin/bash
